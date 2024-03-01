@@ -1,0 +1,61 @@
+{
+	"name": "DelimitedText3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Population-country-1950-1999.csv",
+				"container": "blob"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "column1",
+				"type": "String"
+			},
+			{
+				"name": "column2",
+				"type": "String"
+			},
+			{
+				"name": "column3",
+				"type": "String"
+			},
+			{
+				"name": "column4",
+				"type": "String"
+			},
+			{
+				"name": "column5",
+				"type": "String"
+			},
+			{
+				"name": "column6",
+				"type": "String"
+			},
+			{
+				"name": "column7",
+				"type": "String"
+			},
+			{
+				"name": "column8",
+				"type": "String"
+			},
+			{
+				"name": "column9",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
