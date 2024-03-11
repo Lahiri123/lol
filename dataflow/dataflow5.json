@@ -1,0 +1,91 @@
+{
+	"name": "dataflow5",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DF_SPLIT",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "afganisthan_ds",
+						"type": "DatasetReference"
+					},
+					"name": "afganistan"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_albania",
+						"type": "DatasetReference"
+					},
+					"name": "albaina"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_defaultt",
+						"type": "DatasetReference"
+					},
+					"name": "default"
+				}
+			],
+			"transformations": [
+				{
+					"name": "split1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          LocID as string,",
+				"          Location as string,",
+				"          Time as string,",
+				"          AgeGrp as string,",
+				"          AgeGrpStart as string,",
+				"          AgeGrpSpan as string,",
+				"          PopMale as string,",
+				"          PopFemale as string,",
+				"          PopTotal as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 split(Location == 'Afganistan'|| Location =='Algeria',",
+				"     Location == 'Albania' || Location == 'Angola',",
+				"     disjoint: true) ~> split1@(Afganistan, Albaina, Default)",
+				"split1@Afganistan sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['afganistan.csv'],",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> afganistan",
+				"split1@Albaina sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['albaina.csv'],",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> albaina",
+				"split1@Default sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['default'],",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> default"
+			]
+		}
+	}
+}

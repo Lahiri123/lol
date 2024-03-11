@@ -1,0 +1,61 @@
+{
+	"name": "DF_SPLIT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Population-country-2000-2049.csv",
+				"container": "blob"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "LocID",
+				"type": "String"
+			},
+			{
+				"name": "Location",
+				"type": "String"
+			},
+			{
+				"name": "Time",
+				"type": "String"
+			},
+			{
+				"name": "AgeGrp",
+				"type": "String"
+			},
+			{
+				"name": "AgeGrpStart",
+				"type": "String"
+			},
+			{
+				"name": "AgeGrpSpan",
+				"type": "String"
+			},
+			{
+				"name": "PopMale",
+				"type": "String"
+			},
+			{
+				"name": "PopFemale",
+				"type": "String"
+			},
+			{
+				"name": "PopTotal",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
