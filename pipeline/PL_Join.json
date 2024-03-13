@@ -15,11 +15,15 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
+					"dataflow": {
+						"referenceName": "DF_Join",
+						"type": "DataFlowReference"
 					},
-					"traceLevel": "Fine"
+					"integrationRuntime": {
+						"referenceName": "integrationRuntime1",
+						"type": "IntegrationRuntimeReference"
+					},
+					"traceLevel": "Coarse"
 				}
 			}
 		],
